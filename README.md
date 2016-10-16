@@ -89,6 +89,4 @@
     3. Állapotdiagram
       * ToDo állapotátmenete  
       ![](https://dl.dropboxusercontent.com/u/203114437/AlkFejl/state-machine.PNG)
-4. Dinamikus működés
-    1. Szekvenciadiagram
-    [KÉP]
+
