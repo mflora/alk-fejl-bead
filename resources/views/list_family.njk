@@ -1,0 +1,24 @@
+{% extends "base_nav.njk" %}
+
+{% block content %}
+  <table width=100% border=1 cellpadding=100>
+  <tr>
+    <td width=70% height=50px align=center>
+      <h3>Név</h3>
+    </td>
+    <td width=30% align=center>
+      <h3>Szint</h3>
+    </td>
+  </tr>
+  {% for member in family %}
+    <tr>
+      <td align=center height=50px>
+        {{ member.name }}
+      </td>
+      <td align=center>
+        {{ member.level }}
+      </td>
+    </tr>
+  {% endfor %}
+  <table>
+{% endblock %}

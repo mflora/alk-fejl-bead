@@ -1,0 +1,19 @@
+{% extends "base_all.njk" %}
+
+{% block navbar %}
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/todoes">ToDo-k nekem</a></li>
+      <li><a href="/todoes/byme">ToDo-k tőlem</a></li>
+      <li><a href="/todoes/create">Új ToDo</a></li>
+      <li><a href="/family">Család megtekintése</a></li>
+      <li><a href="/vaults">Kasszák megtekintése</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if currentUser %}
+        <a class="navbar-brand" href="#">Belépve: {{ currentUser.username }}</a>
+        <li><a href="/logout">Kilépés</a></li>
+      {% endif %}
+    </ul>
+  </div>
+{% endblock %}

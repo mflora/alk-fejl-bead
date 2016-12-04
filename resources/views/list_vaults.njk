@@ -1,0 +1,33 @@
+{% extends "base_nav.njk" %}
+
+{% block content %}
+  <table width=100% border=1 cellpadding=100>
+  <tr>
+    <td width=70% height=50px align=center>
+      <h3>Név</h3>
+    </td>
+    <td width=30% align=center>
+      <h3>Összeg</h3>
+    </td>
+  </tr>
+  {% for person in people %}
+    <tr>
+      <td align=center height=50px>
+        {{ person.name }}
+      </td>
+      <td align=center>
+        <form class="form-vertical" method="POST">
+          {{ csrfField }}
+            <input type="hidden" class="form-control" id="inputId" name="id" value="{{ person.id }}"/>
+          <div style="display: inline-block;">
+            <input type="number" class="form-control" id="inputId" name="value" value="{{ person.vault.value }}"/>
+          </div>
+          <div style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Módosít</button>
+          </div>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  <table>
+{% endblock %}

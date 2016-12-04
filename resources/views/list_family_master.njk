@@ -1,0 +1,43 @@
+{% extends "base_nav.njk" %}
+
+{% block content %}
+  <table width=100% border=1 cellpadding=100>
+  <tr>
+    <td width=70% height=50px align=center>
+      <h3>Név</h3>
+    </td>
+    <td width=30% align=center>
+      <h3>Szint</h3>
+    </td>
+  </tr>
+  {% for member in family %}
+    <tr>
+      <td align=center height=50px>
+        {{ member.name }}
+      </td>
+      <td align=center>
+        <form class="form-vertical" method="POST" action="/family/{{ member.id }}">
+          {{ csrfField }}
+          <div style="display: inline-block;">
+            <input type="number" class="form-control" id="inputLevel" name="level" }}" value="{{ member.level }}" maxlength="4" style="width:100px" />
+          </div>
+          <div style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Módosít</button>
+          </div>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+    <tr>
+      <td>
+      </td>
+      <td align=center>
+        <a href="/family/member">
+          <button class="btn btn-danger">Új családtag felvétele</button>
+        </a>
+      </td>
+    </tr>
+  <table>
+  <center>
+  </center>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base_nav.njk" %}
+
+{% block content %}
+  <table width=100% border=1 cellpadding=100>
+  <tr>
+    <td width=10% height=50px align=center>
+      <h3>Teljesített</h3>
+    </td>
+    <td width=30% align=center>
+      <h3>Cím</h3>
+    </td>
+    <td align=center>
+      <h3>Leírás</h3>
+    </td>
+  </tr>
+  {% for todo in todoes %}
+    <tr>
+      <td align=center height=50px>
+        <form method="POST" action="/todoes/{{ todo.id }}">
+          {{ csrfField }}
+          {% if todo.finished %}
+            <button type="submit" class="btn btn-info" disabled>Teljesített</button>
+          {% else %}
+            <button type="submit" class="btn btn-danger">Befejezés</button>
+          {% endif %}
+        </form>
+      </td>
+      <td align=center>
+        <h4>{{ todo.title }}</h4>
+      </td>
+      <td style='padding: 20px;'>
+        {{ todo.desc }}
+      </td>
+    </tr>
+  {% endfor %}
+  <table>
+{% endblock %}

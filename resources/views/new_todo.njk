@@ -1,0 +1,41 @@
+{% extends "base_nav.njk" %}
+
+{% block content %}
+<form class="form-horizontal" method="POST">
+    {{ csrfField }}
+  <fieldset>
+    <legend>Új ToDo felvétele</legend>
+
+    <div class="form-group">
+      <label for="title" class="col-lg-2 control-label">Cím</label>
+      <div class="col-lg-3">
+        <input type="text" class="form-control" id="inputTitle" name="title" }}" placeholder="Cím" value="{{ old('title') }}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputDesc" class="col-lg-2 control-label">Leírás</label>
+      <div class="col-lg-3">
+        <textarea type="text" class="form-control" id="inputDesc" name="desc" placeholder="Leírás" textarea rows="4" cols="50" value="{{ old('desc') }}"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputUser" class="col-lg-2 control-label">Felelős</label>
+      <div class="col-lg-3">
+        <select type="user" class="form-control" id="inputUser" name="user" value="{{ old('user') }}">
+          {% for member in family %}
+          <option value="{{ member.name }}">{{ member.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-danger">Felvétel</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
