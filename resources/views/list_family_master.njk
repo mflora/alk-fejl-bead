@@ -1,5 +1,9 @@
 {% extends "base_nav.njk" %}
 
+{% block scripts %}
+  <script src="/change.js"></script>
+{% endblock %}
+
 {% block content %}
   <table width=100% border=1 cellpadding=100>
   <tr>
@@ -19,7 +23,7 @@
         <form class="form-vertical" method="POST" action="/family/{{ member.id }}">
           {{ csrfField }}
           <div style="display: inline-block;">
-            <input type="number" class="form-control" id="inputLevel" name="level" }}" value="{{ member.level }}" maxlength="4" style="width:100px" />
+            <input type="number" class="form-control" id="inputLevel" name="level" value="{{ member.level }}" maxlength="4" style="width:100px"/>
           </div>
           <div style="display: inline-block;">
             <button type="submit" class="btn btn-danger">Módosít</button>

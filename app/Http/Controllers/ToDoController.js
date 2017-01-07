@@ -7,7 +7,7 @@ const Validator = use('Validator')
 const Database = use('Database')
 
 class ToDoController {
-    * todoes(req, res) {    
+    * todoes(req, res) {
         const user = yield User.findBy('username',yield req.session.get('username'));
 
         // Check if user exists.
@@ -65,6 +65,65 @@ class ToDoController {
 
         yield res.sendView('new_todo', {
             family: family.filter((u) => (u.level >= user.level)).toJSON(),
+        });
+    }
+
+    * ajaxCreate(req, res) {
+        const owner_user = yield User.findBy('username',yield req.session.get('username'));
+
+        // Check if owner exists.
+        if (owner_user == null) {
+            return res.redirect('/');
+        }
+
+        // Check if owner belongs to a family.
+        if (owner_user.family_id == null) {
+            return res.redirect('/family');
+        }
+
+        var post = req.post();
+
+        const user = yield User.findBy('name',post.user);
+
+        // Check if user exists.
+        if (user == null) {
+            yield res.ok({
+                message:'NOT OK!'
+            });
+            return;
+        }
+
+        // Check if owner and user belongs to the same family.
+        if (owner_user.family_id != user.family_id) {
+            yield res.ok({
+                message:'NOT OK!'
+            });
+            return;
+        }
+
+        // Check that owner has the right.
+        if (owner_user.level > user.level) {
+            yield res.ok({
+                message:'NOT OK!'
+            });
+            return;
+        }
+
+        // Create and save new todo.
+        var todoData = {
+            title:post.title,
+            desc:post.desc,
+            owner_id:owner_user.id,
+            user_id:user.id,
+            finished:false,
+            family_id:owner_user.family_id
+        };
+
+        var todo = yield ToDo.create(todoData);
+        yield todo.save();
+
+        yield res.ok({
+            message:'OK!'
         });
     }
 

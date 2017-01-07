@@ -1,7 +1,11 @@
 {% extends "base_nav.njk" %}
 
+{% block scripts %}
+  <script src="/show.js"></script>
+{% endblock %}
+
 {% block content %}
-<form class="form-horizontal" method="POST">
+<form class="form-horizontal" method="POST" id="finish">
     {{ csrfField }}
   <fieldset>
     <legend>Új ToDo felvétele</legend>
@@ -38,4 +42,19 @@
     </div>
   </fieldset>
 </form>
+
+
+  <div class="modal fade confirm-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-body">
+            Biztosan fel akarod venni?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Mégse</button>
+        </div>
+        </div>
+    </div>
+  </div>
 {% endblock %}

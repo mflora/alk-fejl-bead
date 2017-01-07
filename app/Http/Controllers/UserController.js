@@ -33,6 +33,22 @@ class UserController {
         }
     }
 
+    * ajaxLogin(req, res) {
+        try{
+            var post = req.post();
+            yield req.auth.attempt(post.username, post.password);
+            yield req.session.put('username', post.username);
+            res.ok({
+                success:true
+            });
+        }catch(e){
+            res.ok({
+                success:false
+            })
+        }
+    }
+
+
     * logout(req, res) {
         yield req.auth.logout();
         yield req.session.forget('username');

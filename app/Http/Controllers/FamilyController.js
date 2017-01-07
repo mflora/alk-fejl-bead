@@ -25,6 +25,54 @@ class FamilyController {
         });
     }
 
+    * ajaxCreate(req, res) {
+        var user = yield User.findBy('username',yield req.session.get('username'));
+
+        // Check if user exists.
+        if (user == null) {
+            yield res.ok({
+                success: false
+            });
+            return;
+        }
+
+        // Check if user has no family.
+        if (user.family_id != null) {
+            yield res.ok({
+                success: false
+            });
+            return;
+        }
+
+        var post = req.post();
+
+        // Check if family name is set.
+        if (post.family == null) {
+            yield res.ok({
+                success: false
+            });
+            return;
+        }
+
+        // Create family and save it
+        var familyData = {
+            name:post.family,
+            user_id:user.id,
+        };
+
+        var family = yield Family.create(familyData);
+        yield family.save();
+
+        // Modify user, so it belongs to this family.
+        user.family_id = family.id;
+        user.level = 1;
+        yield user.save();
+
+        yield res.ok({
+            success: true
+        });
+    }
+
     * createSubmit(req, res) {
         var user = yield User.findBy('username',yield req.session.get('username'));
 

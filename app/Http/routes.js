@@ -24,3 +24,9 @@ Route.post('/family/:id', 'FamilyController.modifySubmit');
 
 Route.get('/vaults', 'VaultController.show');
 Route.post('/vaults', 'VaultController.modifySubmit');
+
+Route.group('ajax', function () {
+    Route.post('/login', 'UserController.ajaxLogin');
+    Route.post('/todoes/create', 'ToDoController.ajaxCreate');
+    Route.post('/family/create', 'FamilyController.ajaxCreate');
+}).prefix('/ajax');

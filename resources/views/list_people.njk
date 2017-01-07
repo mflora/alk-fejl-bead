@@ -1,5 +1,9 @@
 {% extends "base_nav.njk" %}
 
+{% block scripts %}
+  <script src="/filter.js"></script>
+{% endblock %}
+
 {% block content %}
   <table width=100% border=1 cellpadding=100>
   <tr>
@@ -10,8 +14,14 @@
       <h3>Szint</h3>
     </td>
   </tr>
+  <tr>
+    <td>
+    </td>
+    <td align=center id="inputCell">
+    </td>
+  </tr>
   {% for person in people %}
-    <tr>
+    <tr class="item">
       <td align=center height=50px>
         {{ person.name }}
       </td>
