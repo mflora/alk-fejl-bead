@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
     "start": "node server.js",
-    "lint": "standard"
+    "lint": "standard",
+    "test": "node node_modules/mocha/bin/mocha tests/*.test.js"
   },
   "author": "",
   "license": "MIT",
